@@ -1,7 +1,10 @@
 package com.spring.springboot.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "authorities")
 public class Authorities {
@@ -13,26 +16,9 @@ public class Authorities {
     @Column(name = "authority")
     private String authority;
 
+    @Transient
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "username")
     private User user;
 
-    public Authorities() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
 }
