@@ -1,13 +1,14 @@
 package com.spring.springboot.entity;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "authorities")
-public class Authorities {
+public class Authorities implements GrantedAuthority {
 
     @Id
     @Column(name = "username")
@@ -16,9 +17,11 @@ public class Authorities {
     @Column(name = "authority")
     private String authority;
 
-    @Transient
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "username")
-    private User user;
+    public Authorities() {
+    }
 
+    public Authorities(String username, String authority) {
+        this.username = username;
+        this.authority = authority;
+    }
 }
